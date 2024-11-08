@@ -1,10 +1,10 @@
-FROM alpine:latest
+FROM amazonlinux:latest
 
 LABEL maintainer="Aaron Maurais -- MacCoss Lab"
 
 # add entrypoint
-RUN apk add bash && \
-    apk cache purge && \
+RUN dnf -y install procps unzip && \
+    dnf clean all && \
     cd /usr/local/bin && \
     echo -e '#!/usr/bin/env bash\nset -e\nexec "$@"' > entrypoint && \
     chmod 755 entrypoint
